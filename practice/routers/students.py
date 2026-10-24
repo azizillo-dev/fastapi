@@ -16,8 +16,7 @@ def student_create(student: StudentCreateSchema, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(student)
     return StudentResponseSchema.model_validate(student)
-
-
+    
 
 @router.get('/', response_model=list[StudentResponseSchema])
 def students_list(db: Session = Depends(get_db)):
@@ -31,7 +30,6 @@ def student_detail(student_id: int, db: Session = Depends(get_db)):
     if not student:
         raise HTTPException(status_code=404, detail="Student topilmadi!")
     return StudentResponseSchema.model_validate(student)
-
 
 
 @router.put("/{student_id}", response_model=StudentResponseSchema)
